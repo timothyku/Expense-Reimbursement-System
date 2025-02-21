@@ -15,17 +15,23 @@ public class User {
 
     //We don't need to specify @Column unless we want to define a name, or constraints
 
+    @Column(nullable = false)
+    private String firstname;
+    @Column(nullable = false)
+    private String lastname;
     @Column(nullable = false) //so now every User needs a username
     private String username;
     private String password;
-    private String role = "user";
+    private String role = "employee";
 
     //boilerplate ----------------
     public User() {
     }
 
-    public User(int userId, String username, String password, String role) {
+    public User(int userId, String firstname, String lastname, String username, String password, String role) {
         this.userId = userId;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.username = username;
         this.password = password;
         this.role = role;
@@ -37,6 +43,22 @@ public class User {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getUsername() {
@@ -67,6 +89,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "userId=" + userId +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +

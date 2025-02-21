@@ -17,31 +17,43 @@ export const Register:React.FC = () => {
     }
 
     return(
-        
         <Container>
-          <div>
-              <h1>New here? Create an Account for free!</h1>
-
-              <div>
-                  <Form.Control
-                      type="text"
-                      placeholder="username"
-                      name="username"
-                  />
-              </div>
-              <div>
-                  <Form.Control
+            <div>
+                <h1>New here? Create an Account for free!</h1>
+            </div>
+            <div>
+                <Form.Control
+                    type="text"
+                    placeholder="First Name"
+                    name="firstname"
+                />
+            </div>
+            <div>
+                <Form.Control
+                    type="text"
+                    placeholder="Last Name"
+                    name="lastname"
+                />
+            </div>
+            <div>
+                <Form.Control
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                />
+            </div>
+            <div>
+                <Form.Control
                       type="password"
-                      placeholder="password"
+                      placeholder="Password"
                       name="password"
-                  />
-              </div>
-
-              <div>
-                <Button onClick={register}>Create Account!</Button>
-              </div>
-          </div>
-      </Container>
+                />
+            </div>
+            <br />
+            <div>
+                <Button onClick={register}>Create Account</Button>
+            </div>
+        </Container>
 
     )
 }
