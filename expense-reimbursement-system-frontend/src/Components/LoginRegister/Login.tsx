@@ -1,6 +1,9 @@
 import { Button, Container, Form } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 
 export const Login:React.FC = () => {
+
+    const navigate = useNavigate()
 
     return(
 
