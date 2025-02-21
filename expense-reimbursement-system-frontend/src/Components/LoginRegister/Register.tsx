@@ -1,7 +1,20 @@
-import { Container, Form } from "react-bootstrap"
+import axios from "axios"
+import { Button, Container, Form } from "react-bootstrap"
 
 export const Register:React.FC = () => {
 
+    //Use axios to send HTTP requests from React
+    const register = async() => {
+
+        const response = await axios.post(
+            "http://localhost:8080/auth/register",
+            {username:"reactUser", password:"password"}
+        )
+        .then(() => {
+            alert("User created!")
+        })
+
+    }
 
     return(
         
@@ -25,7 +38,7 @@ export const Register:React.FC = () => {
               </div>
 
               <div>
-                <button>Create Account!</button>
+                <Button onClick={register}>Create Account!</Button>
               </div>
           </div>
       </Container>
