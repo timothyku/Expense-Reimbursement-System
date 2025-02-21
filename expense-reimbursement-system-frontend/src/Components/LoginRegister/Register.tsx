@@ -8,7 +8,10 @@ export const Register:React.FC = () => {
 
         const response = await axios.post(
             "http://localhost:8080/auth/register",
-            {username:"reactUser", password:"password"}
+            {
+                firstname:"React", lastname:"User",
+                username:"reactUser", password:"password"
+            }
         )
         .then(() => {
             alert("User created!")
