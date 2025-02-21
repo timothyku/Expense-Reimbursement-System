@@ -18,7 +18,7 @@ public class User {
     @Column(nullable = false) //so now every User needs a username
     private String userName;
     private String password;
-    private String role;
+    private String role = "user";
 
     //boilerplate ----------------
     public User() {
