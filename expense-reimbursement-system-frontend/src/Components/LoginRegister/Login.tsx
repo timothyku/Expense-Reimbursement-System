@@ -27,7 +27,7 @@ export const Login:React.FC = () => {
                 </div>
                 
 
-            <Button className="btn-success m-1" onClick={login}>Login</Button>
+            <Button className="btn-success m-1">Login</Button>
             <Button className="btn-dark" onClick={()=>navigate("/register")}>Register</Button>
         </Container>
     )
