@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "reimb_reqs")
-public class ReimbRequests {
+public class ReimbRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,10 +36,10 @@ public class ReimbRequests {
     private User user;
 
     //boilerplate -----------
-    public ReimbRequests() {
+    public ReimbRequest() {
     }
 
-    public ReimbRequests(int reimbId, String description, float amount, String status, User user) {
+    public ReimbRequest(int reimbId, String description, float amount, String status, User user) {
         this.reimbId = reimbId;
         this.description = description;
         this.amount = amount;
