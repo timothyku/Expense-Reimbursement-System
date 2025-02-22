@@ -38,6 +38,13 @@ export const UserTable:React.FC = () => {
         } 
     }
 
+
+    //function that does a fake update delete (wanna show how to extract data from a map)
+    const updateUser = (user:User) => {
+        alert("User " + user.userId + " has been fake updated or deleted")
+    } 
+
+
     return (
         <Container className="d-flex flex-column align-items-center">
 
@@ -51,6 +58,7 @@ export const UserTable:React.FC = () => {
                         <th>Last Name</th>
                         <th>Username</th>
                         <th>Role</th>
+                        <th>Promotion</th>
                     </tr>
                 </thead>
 
@@ -62,6 +70,10 @@ export const UserTable:React.FC = () => {
                             <td>{user.lastname}</td>
                             <td>{user.username}</td>
                             <td>{user.role}</td>
+                            <td>
+                                <Button variant="outline-success" onClick={()=> updateUser(user)}>Promote</Button>
+                                <Button variant="danger" onClick={()=> updateUser}>Fire</Button>
+                            </td>
                         </tr>
                     ))} {/* WHY () to open the arrow func? bc it implicityly returns (i.e. no need the return keyword) */}
                 </tbody>
