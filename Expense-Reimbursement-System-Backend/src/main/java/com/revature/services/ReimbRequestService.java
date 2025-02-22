@@ -56,5 +56,7 @@ public class ReimbRequestService {
         return reimbRequestDAO.save(newRequest);
     }
 
+    //TODO: get requests by user ID
+
 
 }
