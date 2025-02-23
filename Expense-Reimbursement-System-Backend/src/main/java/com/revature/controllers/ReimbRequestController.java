@@ -42,5 +42,12 @@ public class ReimbRequestController {
         return ResponseEntity.ok(myRequests);
     }
 
+    @GetMapping("/my-pending-requests")
+    public ResponseEntity<List<ReimbRequest>> getMyPendingRequests(HttpSession session){
 
+        int userId = (int) session.getAttribute("userId");
+
+        List<ReimbRequest> myPendingRequests = reimbRequestService.getMyPendingRequests(userId, "Pending");
+        return ResponseEntity.ok(myPendingRequests);
+    }
 }

@@ -64,5 +64,8 @@ public class ReimbRequestService {
         return reimbRequestDAO.findByUser_UserId(userId);
     }
 
+    public List<ReimbRequest> getMyPendingRequests(int userId, String status){
+        return reimbRequestDAO.findByUser_UserIdAndStatus(userId, status);
+    }
 
 }

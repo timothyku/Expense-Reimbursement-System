@@ -14,6 +14,7 @@ export const RequestTable:React.FC = () => {
 
     }, [])
 
+    // get all the Expense Reimbursement Requests
     const getMyRequests = async () => {
 
         try{
@@ -26,13 +27,37 @@ export const RequestTable:React.FC = () => {
             alert("Something went wrong trying to fetch the Expense Reimbursement Requests")
         }
 
-        
+    }
+
+    // get al the pending Expense Reimbursement Requests
+    const getMyPendingRequests = async () => {
+
+        try{
+            const response = await axios.get("http://localhost:8080/requests/my-pending-requests",
+            {withCredentials:true})
+
+            setRequests(response.data)
+    
+        } catch {
+            alert("Something went wrong trying to fetch the Pending Expense Reimbursement Requests")
+        }
+
     }
 
     return(
         <Container className="d-flex flex-column align-items-center">
 
-            <h3>My Expense Reimbursement Requests: </h3>
+            <h3>Expense Reimbursement Requests: </h3>
+
+            {/* Buttons to filter All/Pending requests */}
+            <div className="mb-3">
+                <Button variant="primary" className="me-2" onClick={getMyRequests}>
+                    All Requests
+                </Button>
+                <Button variant="warning" onClick={getMyPendingRequests}>
+                    Pending Requests
+                </Button>
+            </div>
 
             <Table className="table-dark table-hover table-striped w-50">
                 <thead>
