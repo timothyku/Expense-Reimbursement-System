@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom"
-import { store } from "../../GlobalData/store";
 import { Button, Card, Col, Container, Row, Form } from "react-bootstrap";
-import { FaPaperPlane } from "react-icons/fa";
+import { FaArrowLeft, FaPaperPlane } from "react-icons/fa";
 
 export const NewRequest:React.FC = () => {
 
@@ -17,6 +16,7 @@ export const NewRequest:React.FC = () => {
 
     }, [])
 
+    // retrieve the stored 
     const storedUser = JSON.parse(localStorage.getItem("loggedInUser") || "null");
 
     const [requestCreds, setRequestCreds] = useState({
@@ -83,9 +83,12 @@ export const NewRequest:React.FC = () => {
 
           <Row className="mt-3">
             <Col className="d-flex justify-content-center">
-              <Button variant="primary" className="me-2 px-4" onClick={createRequest}>
-                <FaPaperPlane className="me-2" /> Submit
-              </Button>
+                <Button variant="secondary" className="me-2 px-4" onClick={() => navigate("/requests/my-requests")}>
+                    <FaArrowLeft className="me-2" /> Back
+                </Button>
+                <Button variant="primary" className="me-2 px-4" onClick={createRequest}>
+                    <FaPaperPlane className="me-2" /> Submit
+                </Button>
             </Col>
           </Row>
         </Form>

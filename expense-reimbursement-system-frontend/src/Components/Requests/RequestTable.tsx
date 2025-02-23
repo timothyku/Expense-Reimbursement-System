@@ -2,9 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Table, Card, Badge, Spinner } from "react-bootstrap";
 import { Request } from "../../Interfaces/Request";
-import { FaClipboardList, FaClock } from "react-icons/fa"; // Icons for buttons
+import { FaClipboardList, FaClock, FaPlus } from "react-icons/fa"; // Icons for buttons
+import { useNavigate } from "react-router-dom";
 
 export const RequestTable: React.FC = () => {
+
+  const navigate = useNavigate(); //Hook for navigation
   const [requests, setRequests] = useState<Request[]>([]);
   const [loading, setLoading] = useState<boolean>(false); // Loading state
 
@@ -55,6 +58,7 @@ export const RequestTable: React.FC = () => {
     return <Badge bg={variant}>{status.toUpperCase()}</Badge>;
   };
 
+
   return (
     <Container className="d-flex flex-column align-items-center mt-4">
       <Card className="shadow-lg p-4 w-75">
@@ -65,8 +69,11 @@ export const RequestTable: React.FC = () => {
           <Button variant="warning" className="me-2" onClick={getMyPendingRequests}>
             <FaClipboardList className="me-2" /> Pending Requests
           </Button>
-          <Button variant="primary" onClick={getMyRequests}>
+          <Button variant="primary" className="me-2" onClick={getMyRequests}>
             <FaClock className="me-2" /> All Requests
+          </Button>
+          <Button variant="primary" className="me-2" onClick={() => navigate("/requests/new-request")}>
+            <FaPlus className="me-2" /> Create A New Request
           </Button>
         </div>
 
