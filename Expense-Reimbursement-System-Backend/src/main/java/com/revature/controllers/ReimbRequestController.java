@@ -3,13 +3,17 @@ package com.revature.controllers;
 import com.revature.models.DTOs.IncomingReimbRequestDTO;
 import com.revature.models.ReimbRequest;
 import com.revature.services.ReimbRequestService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/requests")
-@CrossOrigin
+@CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
 public class ReimbRequestController {
 
     private final ReimbRequestService reimbRequestService;
@@ -29,6 +33,14 @@ public class ReimbRequestController {
     }
 
     //TODO: get requests by user ID
+    @GetMapping("/my-requests")
+    public ResponseEntity<List<ReimbRequest>> getMyRequests(HttpSession session){
+
+        int userId = (int) session.getAttribute("userId");
+
+        List<ReimbRequest> myRequests = reimbRequestService.getMyRequests(userId);
+        return ResponseEntity.ok(myRequests);
+    }
 
 
 }

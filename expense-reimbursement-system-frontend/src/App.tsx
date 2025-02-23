@@ -19,7 +19,7 @@ function App() {
           <Route path="" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
           <Route path="users" element={<UserTable/>}/>
-          <Route path="requests" element={<RequestTable/>}/>
+          <Route path="requests/my-requests" element={<RequestTable/>}/>
         </Routes>
       </BrowserRouter>
     </>

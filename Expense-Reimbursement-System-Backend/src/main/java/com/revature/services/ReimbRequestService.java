@@ -3,17 +3,19 @@ package com.revature.services;
 import com.revature.DAOs.ReimbRequestDAO;
 import com.revature.DAOs.UserDAO;
 import com.revature.models.DTOs.IncomingReimbRequestDTO;
+import com.revature.models.DTOs.LoginDTO;
 import com.revature.models.ReimbRequest;
 import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ReimbRequestService {
 
-    //Autowire the UserDAO and VideoGameDAO
+    //Autowire the UserDAO and reimbRequestDAO
     private final UserDAO userDAO;
     private final ReimbRequestDAO reimbRequestDAO;
 
@@ -57,6 +59,10 @@ public class ReimbRequestService {
     }
 
     //TODO: get requests by user ID
+    public List<ReimbRequest> getMyRequests(int userId){
+
+        return reimbRequestDAO.findByUser_UserId(userId);
+    }
 
 
 }
