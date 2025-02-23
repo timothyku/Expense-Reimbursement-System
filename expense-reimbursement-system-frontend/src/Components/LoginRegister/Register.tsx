@@ -34,7 +34,7 @@ export const Register: React.FC = () => {
     try {
       await axios.post("http://localhost:8080/auth/register", registerCreds);
       alert("User created successfully!");
-      navigate("/login"); // Redirect to login page after success
+      navigate("/"); // Redirect to login page after success
     } catch (error) {
       alert("Registration failed. Please try again.");
     }
@@ -95,7 +95,7 @@ export const Register: React.FC = () => {
               <Button variant="primary" className="me-2 px-4" onClick={register}>
                 <FaUserPlus className="me-2" /> Create Account
               </Button>
-              <Button variant="dark" onClick={() => navigate("/login")}>
+              <Button variant="dark" onClick={() => navigate("")}>
                 Back to Login
               </Button>
             </Col>

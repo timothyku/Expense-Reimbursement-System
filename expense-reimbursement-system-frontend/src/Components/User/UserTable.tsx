@@ -40,6 +40,12 @@ export const UserTable:React.FC = () => {
         } 
     }
 
+    const deleteUser = async (user:User) => {
+        if (window.confirm("Delete this user?")) {
+            const response = await axios.post("http://localhost:8080/users/delete",  { userId: user.userId } , { withCredentials: true});
+        }
+        getAllUsers()
+    }
 
     //function that does a fake update delete (wanna show how to extract data from a map)
     const updateUser = (user:User) => {
@@ -47,7 +53,8 @@ export const UserTable:React.FC = () => {
         
         //TODO: could make another call to getAllUsers for automatic udpates
         //TODO2: (alternative to option 1) cache the list of users and update that so we don't make a repeat DB call
-    } 
+    }
+
 
 
     return (
@@ -64,6 +71,7 @@ export const UserTable:React.FC = () => {
                         <th>Username</th>
                         <th>Role</th>
                         <th>Promotion</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
 
@@ -77,8 +85,9 @@ export const UserTable:React.FC = () => {
                             <td>{user.role}</td>
                             <td>
                                 <Button variant="outline-success" onClick={()=> updateUser(user)}>Promote</Button>
-                                <Button variant="danger" onClick={()=> updateUser}>Fire</Button>
+                                <Button variant="danger" onClick={()=> updateUser(user)}>Fire</Button>
                             </td>
+                            <td><Button variant="danger" onClick={()=> deleteUser(user)}>Delete</Button></td>
                         </tr>
                     ))} {/* WHY () to open the arrow func? bc it implicityly returns (i.e. no need the return keyword) */}
                 </tbody>

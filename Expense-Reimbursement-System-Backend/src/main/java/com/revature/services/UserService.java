@@ -34,4 +34,11 @@ public class UserService {
         return userDTOs;
     }
 
+    public void deleteUserById(int userId){
+        if (!userDAO.existsById(userId)) {
+            throw new RuntimeException("User not found");
+        }
+        userDAO.deleteById(userId);
+    }
+
 }
