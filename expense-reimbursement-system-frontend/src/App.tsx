@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { Register } from './Components/LoginRegister/Register'
 import { UserTable } from './Components/User/UserTable'
 import { RequestTable } from './Components/Requests/RequestTable'
+import { NewRequest } from './Components/Requests/NewRequest'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="register" element={<Register/>}/>
           <Route path="users" element={<UserTable/>}/>
           <Route path="requests/my-requests" element={<RequestTable/>}/>
+          <Route path="requests/new-request" element={<NewRequest/>}/>
         </Routes>
       </BrowserRouter>
     </>

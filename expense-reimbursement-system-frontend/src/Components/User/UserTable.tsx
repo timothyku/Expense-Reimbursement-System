@@ -27,7 +27,6 @@ export const UserTable:React.FC = () => {
             {withCredentials:true})
             //Again, we need withCredentials if the request requires specific session info
             
-            
 
             //TODO: error throwing code
 

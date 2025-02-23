@@ -9,7 +9,7 @@ export const RequestTable: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false); // Loading state
 
   useEffect(() => {
-    getMyRequests();
+    getMyPendingRequests();
   }, []);
 
   // Fetch all reimbursement requests
@@ -62,11 +62,11 @@ export const RequestTable: React.FC = () => {
 
         {/* Buttons to filter All/Pending requests */}
         <div className="d-flex justify-content-center mb-3">
-          <Button variant="primary" className="me-2" onClick={getMyRequests}>
-            <FaClipboardList className="me-2" /> All Requests
+          <Button variant="warning" className="me-2" onClick={getMyPendingRequests}>
+            <FaClipboardList className="me-2" /> Pending Requests
           </Button>
-          <Button variant="warning" onClick={getMyPendingRequests}>
-            <FaClock className="me-2" /> Pending Requests
+          <Button variant="primary" onClick={getMyRequests}>
+            <FaClock className="me-2" /> All Requests
           </Button>
         </div>
 

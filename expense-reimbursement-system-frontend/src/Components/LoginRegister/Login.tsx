@@ -34,6 +34,7 @@ export const Login: React.FC = () => {
     try {
       const response = await axios.post("http://localhost:8080/auth/login", loginCreds, { withCredentials: true });
       store.loggedInUser = response.data;
+      localStorage.setItem("loggedInUser", JSON.stringify(response.data));
 
       alert(`${store.loggedInUser.username} has logged in! Welcome.`);
 
