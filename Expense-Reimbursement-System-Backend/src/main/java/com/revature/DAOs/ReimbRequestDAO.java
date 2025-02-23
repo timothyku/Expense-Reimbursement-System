@@ -14,4 +14,8 @@ public interface ReimbRequestDAO extends JpaRepository<ReimbRequest, Integer>{
 
     //Find a list of requests by their User's id and status
     public List<ReimbRequest> findByUser_UserIdAndStatus(int userId, String status);
+
+    //Find a list of requests by status excluding the manager's own requests
+    public List<ReimbRequest> findByStatusAndUser_UserIdNot(String status, int userId);
+
 }

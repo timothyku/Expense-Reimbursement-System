@@ -3,7 +3,6 @@ package com.revature.services;
 import com.revature.DAOs.ReimbRequestDAO;
 import com.revature.DAOs.UserDAO;
 import com.revature.models.DTOs.IncomingReimbRequestDTO;
-import com.revature.models.DTOs.LoginDTO;
 import com.revature.models.ReimbRequest;
 import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +57,6 @@ public class ReimbRequestService {
         return reimbRequestDAO.save(newRequest);
     }
 
-    //TODO: get requests by user ID
     public List<ReimbRequest> getMyRequests(int userId){
 
         return reimbRequestDAO.findByUser_UserId(userId);
@@ -67,5 +65,32 @@ public class ReimbRequestService {
     public List<ReimbRequest> getMyPendingRequests(int userId, String status){
         return reimbRequestDAO.findByUser_UserIdAndStatus(userId, status);
     }
+
+    public List<ReimbRequest> getOthersPendingRequests(int userId, String status){
+        return reimbRequestDAO.findByStatusAndUser_UserIdNot(status, userId);
+    }
+
+    public List<ReimbRequest> getAllRequests(){
+        return reimbRequestDAO.findAll();
+    }
+
+    public void approveRequest(int reimbId) {
+
+        ReimbRequest reimbRequest = reimbRequestDAO.findById(reimbId)
+                .orElseThrow(() -> new IllegalArgumentException("Request not found."));
+
+        reimbRequest.setStatus("Approved");
+        reimbRequestDAO.save(reimbRequest);
+    }
+
+    public void denyRequest(int reimbId) {
+
+        ReimbRequest reimbRequest = reimbRequestDAO.findById(reimbId)
+                .orElseThrow(() -> new IllegalArgumentException("Request not found."));
+
+        reimbRequest.setStatus("Denied");
+        reimbRequestDAO.save(reimbRequest);
+    }
+
 
 }

@@ -9,6 +9,8 @@ import { Register } from './Components/LoginRegister/Register'
 import { UserTable } from './Components/User/UserTable'
 import { RequestTable } from './Components/Requests/RequestTable'
 import { NewRequest } from './Components/Requests/NewRequest'
+import { OthersRequestTable } from './Components/Requests/OthersRequestTable'
+
 
 function App() {
 
@@ -22,6 +24,7 @@ function App() {
           <Route path="users" element={<UserTable/>}/>
           <Route path="requests/my-requests" element={<RequestTable/>}/>
           <Route path="requests/new-request" element={<NewRequest/>}/>
+          <Route path="requests/requests-for-approval" element={<OthersRequestTable/>}/>
         </Routes>
       </BrowserRouter>
     </>

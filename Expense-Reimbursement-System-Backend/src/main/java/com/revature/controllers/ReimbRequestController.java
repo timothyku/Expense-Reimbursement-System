@@ -5,7 +5,6 @@ import com.revature.models.ReimbRequest;
 import com.revature.services.ReimbRequestService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,4 +49,21 @@ public class ReimbRequestController {
         List<ReimbRequest> myPendingRequests = reimbRequestService.getMyPendingRequests(userId, "Pending");
         return ResponseEntity.ok(myPendingRequests);
     }
+
+    @GetMapping("/others-pending-requests")
+    public ResponseEntity<List<ReimbRequest>> getOthersPendingRequests(HttpSession session) {
+
+        int userId = (int) session.getAttribute("userId");
+
+        List<ReimbRequest> othersPendingRequests = reimbRequestService.getOthersPendingRequests(userId, "Pending");
+        return ResponseEntity.ok(othersPendingRequests);
+    }
+
+    @GetMapping("/all-requests")
+    public ResponseEntity<List<ReimbRequest>> getAllRequests() {
+
+        List<ReimbRequest> allRequests = reimbRequestService.getAllRequests();
+        return ResponseEntity.ok(allRequests);
+    }
+
 }

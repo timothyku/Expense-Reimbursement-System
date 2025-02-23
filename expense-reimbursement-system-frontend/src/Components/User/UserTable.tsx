@@ -26,13 +26,13 @@ export const UserTable:React.FC = () => {
             const response = await axios.get("http://localhost:8080/users",
             {withCredentials:true})
             //Again, we need withCredentials if the request requires specific session info
-            
 
-            //TODO: error throwing code
 
             console.log(response.data) //print out the data just to see it
 
-            const sortedUsers = response.data.sort((a, b) => a.id - b.id);
+            const sortedUsers = response.data.sort((a, b) => {
+                return Number(a.userId) - Number(b.userId);
+            });
             //store the user data in our "users" state object
             setUsers(sortedUsers)
 
@@ -58,6 +58,9 @@ export const UserTable:React.FC = () => {
         );
         getAllUsers();
     }
+
+
+
 
     //function that does a fake update delete (wanna show how to extract data from a map)
     const updateUser = (user:User) => {
@@ -89,7 +92,7 @@ export const UserTable:React.FC = () => {
 
                 <tbody className="table-secondary">
                     {users.map((user:User) => (
-                        <tr key={user.userId}> {/* To optimize performance, so no need to refresh whole table but only a row when a specific user data is updated*/}
+                        <tr key={user.userId}>
                             <td>{user.userId}</td>
                             <td>{user.firstname}</td>
                             <td>{user.lastname}</td>
@@ -102,7 +105,7 @@ export const UserTable:React.FC = () => {
                                 <Button variant="danger" onClick={()=> deleteUser(user)}>Delete</Button>
                             </td>
                         </tr>
-                    ))} {/* WHY () to open the arrow func? bc it implicityly returns (i.e. no need the return keyword) */}
+                    ))}
                 </tbody>
 
             </Table>
