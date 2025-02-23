@@ -7,6 +7,7 @@ import { Login } from './Components/LoginRegister/Login'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Register } from './Components/LoginRegister/Register'
 import { UserTable } from './Components/User/UserTable'
+import { RequestTable } from './Components/Requests/RequestTable'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
           <Route path="users" element={<UserTable/>}/>
+          <Route path="requests" element={<RequestTable/>}/>
         </Routes>
       </BrowserRouter>
     </>
