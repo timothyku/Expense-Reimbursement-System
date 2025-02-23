@@ -1,90 +1,109 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { Button, Container, Table } from "react-bootstrap"
-import { Request } from "../../Interfaces/Request"
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Button, Container, Table, Card, Badge, Spinner } from "react-bootstrap";
+import { Request } from "../../Interfaces/Request";
+import { FaClipboardList, FaClock } from "react-icons/fa"; // Icons for buttons
 
-export const RequestTable:React.FC = () => {
+export const RequestTable: React.FC = () => {
+  const [requests, setRequests] = useState<Request[]>([]);
+  const [loading, setLoading] = useState<boolean>(false); // Loading state
 
-    const [requests, setRequests] = useState<Request[]>([])
+  useEffect(() => {
+    getMyRequests();
+  }, []);
 
-    // call a GET request for the logged-in user's requests when the components loads
-    useEffect(() =>{
-
-        getMyRequests()
-
-    }, [])
-
-    // get all the Expense Reimbursement Requests
-    const getMyRequests = async () => {
-
-        try{
-            const response = await axios.get("http://localhost:8080/requests/my-requests",
-            {withCredentials:true})
-            
-            setRequests(response.data)
-        
-        } catch {
-            alert("Something went wrong trying to fetch the Expense Reimbursement Requests")
-        }
-
+  // Fetch all reimbursement requests
+  const getMyRequests = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("http://localhost:8080/requests/my-requests", { withCredentials: true });
+      setRequests(response.data);
+    } catch {
+      alert("Something went wrong while fetching requests");
     }
+    setLoading(false);
+  };
 
-    // get al the pending Expense Reimbursement Requests
-    const getMyPendingRequests = async () => {
-
-        try{
-            const response = await axios.get("http://localhost:8080/requests/my-pending-requests",
-            {withCredentials:true})
-
-            setRequests(response.data)
-    
-        } catch {
-            alert("Something went wrong trying to fetch the Pending Expense Reimbursement Requests")
-        }
-
+  // Fetch only pending reimbursement requests
+  const getMyPendingRequests = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("http://localhost:8080/requests/my-pending-requests", { withCredentials: true });
+      setRequests(response.data);
+    } catch {
+      alert("Something went wrong while fetching pending requests");
     }
+    setLoading(false);
+  };
 
-    return(
-        <Container className="d-flex flex-column align-items-center">
+  // Function to format status as a badge
+  const renderStatusBadge = (status: string) => {
+    let variant;
+    switch (status.toLowerCase()) {
+      case "pending":
+        variant = "warning";
+        break;
+      case "approved":
+        variant = "success";
+        break;
+      case "rejected":
+        variant = "danger";
+        break;
+      default:
+        variant = "secondary";
+    }
+    return <Badge bg={variant}>{status.toUpperCase()}</Badge>;
+  };
 
-            <h3>Expense Reimbursement Requests: </h3>
+  return (
+    <Container className="d-flex flex-column align-items-center mt-4">
+      <Card className="shadow-lg p-4 w-75">
+        <h3 className="text-center mb-4">Expense Reimbursement Requests</h3>
 
-            {/* Buttons to filter All/Pending requests */}
-            <div className="mb-3">
-                <Button variant="primary" className="me-2" onClick={getMyRequests}>
-                    All Requests
-                </Button>
-                <Button variant="warning" onClick={getMyPendingRequests}>
-                    Pending Requests
-                </Button>
-            </div>
+        {/* Buttons to filter All/Pending requests */}
+        <div className="d-flex justify-content-center mb-3">
+          <Button variant="primary" className="me-2" onClick={getMyRequests}>
+            <FaClipboardList className="me-2" /> All Requests
+          </Button>
+          <Button variant="warning" onClick={getMyPendingRequests}>
+            <FaClock className="me-2" /> Pending Requests
+          </Button>
+        </div>
 
-            <Table className="table-dark table-hover table-striped w-50">
-                <thead>
-                    <tr>
-                        <th>Request Id</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        
-                    </tr>
-                </thead>
+        {/* Loading Spinner */}
+        {loading && <Spinner animation="border" variant="primary" className="d-block mx-auto mb-3" />}
 
-                <tbody className="table-secondary">
-                    {requests.map((request:Request) => (
-                        <tr key={request.reimbId}> {/* To optimize performance, so no need to refresh whole table but only a row when a specific user data is updated*/}
-                            <td>{request.reimbId}</td>
-                            <td>{request.description}</td>
-                            <td>{request.amount}</td>
-                            <td>{request.status}</td>
-                            
-                        </tr>
-                    ))} {/* WHY () to open the arrow func? bc it implicityly returns (i.e. no need the return keyword) */}
-                </tbody>
+        {/* Requests Table */}
+        <Table className="table-hover text-center" striped bordered>
+          <thead className="table-dark">
+            <tr>
+              <th>Request ID</th>
+              <th>Description</th>
+              <th>Amount ($)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
 
-            </Table>
-
-        </Container>
-    )
-
-}
+          <tbody>
+            {requests.length > 0 ? (
+              requests.map((request: Request) => (
+                <tr key={request.reimbId}>
+                  <td>{request.reimbId}</td>
+                  <td>{request.description}</td>
+                  <td>{request.amount.toFixed(2)}</td>
+                  <td>{renderStatusBadge(request.status)}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={4} className="text-muted text-center">
+                  No requests found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </Card>
+    </Container>
+  );
+};
