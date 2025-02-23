@@ -41,4 +41,11 @@ public class UserService {
         userDAO.deleteById(userId);
     }
 
+    public void updateUserRole(int userId, String newRole){
+        User user = userDAO.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found."));
+        user.setRole(newRole);
+        userDAO.save(user);
+    }
+
 }

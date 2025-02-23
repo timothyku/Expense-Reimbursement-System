@@ -32,8 +32,9 @@ export const UserTable:React.FC = () => {
 
             console.log(response.data) //print out the data just to see it
 
+            const sortedUsers = response.data.sort((a, b) => a.id - b.id);
             //store the user data in our "users" state object
-            setUsers(response.data)
+            setUsers(sortedUsers)
 
         } catch {
             alert("Something went wrong tryig to fetch users")
@@ -42,9 +43,20 @@ export const UserTable:React.FC = () => {
 
     const deleteUser = async (user:User) => {
         if (window.confirm("Delete this user?")) {
-            const response = await axios.post("http://localhost:8080/users/delete",  { userId: user.userId } , { withCredentials: true});
+            const response = await axios.post("http://localhost:8080/users/delete",
+                { userId: user.userId },
+                { withCredentials: true});
         }
-        getAllUsers()
+        getAllUsers();
+    }
+
+    const updateUserRole = async (user:User) => {
+        const newRole = user.role === "employee" ? "manager" : "employee";
+        const response = await axios.post("http://localhost:8080/users/update-role",
+                { userId: user.userId, newRole: newRole },
+                { withCredentials: true}
+        );
+        getAllUsers();
     }
 
     //function that does a fake update delete (wanna show how to extract data from a map)
@@ -70,7 +82,7 @@ export const UserTable:React.FC = () => {
                         <th>Last Name</th>
                         <th>Username</th>
                         <th>Role</th>
-                        <th>Promotion</th>
+                        <th>Action</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -84,10 +96,11 @@ export const UserTable:React.FC = () => {
                             <td>{user.username}</td>
                             <td>{user.role}</td>
                             <td>
-                                <Button variant="outline-success" onClick={()=> updateUser(user)}>Promote</Button>
-                                <Button variant="danger" onClick={()=> updateUser(user)}>Fire</Button>
+                                <Button variant="outline-success" onClick={()=> updateUserRole(user)}>Change to {user.role === "employee" ? "manager" : "employee"}</Button>
                             </td>
-                            <td><Button variant="danger" onClick={()=> deleteUser(user)}>Delete</Button></td>
+                            <td>
+                                <Button variant="danger" onClick={()=> deleteUser(user)}>Delete</Button>
+                            </td>
                         </tr>
                     ))} {/* WHY () to open the arrow func? bc it implicityly returns (i.e. no need the return keyword) */}
                 </tbody>

@@ -3,6 +3,7 @@ package com.revature.controllers;
 import com.revature.aspects.ManagerOnly;
 import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.DTOs.UserIdRequestDTO;
+import com.revature.models.DTOs.UserRoleUpdateDTO;
 import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,16 @@ public class UserController {
         int userId = request.getUserId();
         userService.deleteUserById(userId);
         return ResponseEntity.ok("User deleted successfully");
+    }
+
+    @PostMapping("/update-role")
+    @ManagerOnly
+    public ResponseEntity<String> updateUserRole(@RequestBody UserRoleUpdateDTO userRoleUpdateDTO) {
+        System.out.println("Received UseriD: " + userRoleUpdateDTO.getUserId());
+        System.out.println("Received Role: " + userRoleUpdateDTO.getNewRole());
+
+        userService.updateUserRole(userRoleUpdateDTO.getUserId(), userRoleUpdateDTO.getNewRole());
+        return ResponseEntity.ok("User role updated successfully.");
     }
 
 }
