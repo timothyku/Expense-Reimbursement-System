@@ -23,4 +23,7 @@ public class GlobalExceptionHandler {
         //we send the message in the exception in the response body (should change based on what went wrong)
     }
 
+    //TODO: add more exception handlers, make some custom exceptions
+
+
 }

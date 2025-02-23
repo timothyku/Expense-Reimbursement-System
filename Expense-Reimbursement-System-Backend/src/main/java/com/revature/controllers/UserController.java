@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.aspects.ManagerOnly;
 import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class UserController {
     }
 
     @GetMapping
+    @ManagerOnly //only managers can use this method, thanks to our custom annotation
     public ResponseEntity<List<OutgoingUserDTO>> getAllUsers(){
 
         return ResponseEntity.ok(userService.getAllUsers());
