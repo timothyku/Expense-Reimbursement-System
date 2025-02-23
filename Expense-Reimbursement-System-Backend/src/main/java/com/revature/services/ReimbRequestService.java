@@ -67,6 +67,7 @@ public class ReimbRequestService {
     }
 
     public List<ReimbRequest> getOthersPendingRequests(int userId, String status){
+
         return reimbRequestDAO.findByStatusAndUser_UserIdNot(status, userId);
     }
 

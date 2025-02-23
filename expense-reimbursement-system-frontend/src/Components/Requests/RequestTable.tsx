@@ -49,7 +49,7 @@ export const RequestTable: React.FC = () => {
       case "approved":
         variant = "success";
         break;
-      case "rejected":
+      case "denied":
         variant = "danger";
         break;
       default:
