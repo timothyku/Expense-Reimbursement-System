@@ -15,7 +15,7 @@ import { Request } from "../../Interfaces/Request";
 import { FaClipboardList, FaClock, FaPlus } from "react-icons/fa"; // Icons for buttons
 import { useNavigate } from "react-router-dom";
 
-export const RequestTable: React.FC = () => {
+export const RequestTableManager: React.FC = () => {
   const navigate = useNavigate(); // Hook for navigation
   const [requests, setRequests] = useState<Request[]>([]);
   const [loading, setLoading] = useState<boolean>(false); // Loading state
@@ -81,6 +81,16 @@ export const RequestTable: React.FC = () => {
           Expense Reimbursement System
         </Navbar.Brand>
         <Nav className="ms-auto">
+          {/* Dropdown Menu */}
+          <NavDropdown title="Navigation" id="nav-dropdown" menuVariant="dark">
+            <NavDropdown.Item onClick={() => navigate("/users")}>
+              User Management
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={() => navigate("/requests/requests-for-approval")}>
+              Request Management
+            </NavDropdown.Item>
+          </NavDropdown>
+          {/* Logout Button */}
           <Nav.Link className="text-light" onClick={() => navigate("/")}>
             Logout
           </Nav.Link>

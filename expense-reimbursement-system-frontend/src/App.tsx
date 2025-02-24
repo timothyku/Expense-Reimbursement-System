@@ -10,6 +10,7 @@ import { UserTable } from './Components/User/UserTable'
 import { RequestTable } from './Components/Requests/RequestTable'
 import { NewRequest } from './Components/Requests/NewRequest'
 import { OthersRequestTable } from './Components/Requests/OthersRequestTable'
+import { RequestTableManager } from './Components/Requests/RequestTableManager'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
           <Route path="users" element={<UserTable/>}/>
+          <Route path="requests/my-requests-manager" element={<RequestTableManager/>}/>
           <Route path="requests/my-requests" element={<RequestTable/>}/>
           <Route path="requests/new-request" element={<NewRequest/>}/>
           <Route path="requests/requests-for-approval" element={<OthersRequestTable/>}/>

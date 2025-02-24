@@ -92,10 +92,21 @@ export const Register: React.FC = () => {
 
           <Row className="mt-3">
             <Col className="d-flex justify-content-center">
-              <Button variant="primary" className="me-2 px-4" onClick={register}>
+              <Button
+                variant="primary"
+                className="me-2 px-4"
+                onClick={register}
+                style={{
+                  backgroundColor: "#0056b3", // Darker blue for consistency with the theme
+                  borderColor: "#0056b3",
+                  transition: "background-color 0.3s ease-in-out",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#004085")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#0056b3")}
+              >
                 <FaUserPlus className="me-2" /> Create Account
               </Button>
-              <Button variant="dark" onClick={() => navigate("")}>
+              <Button variant="dark" onClick={() => navigate("/")}>
                 Back to Login
               </Button>
             </Col>

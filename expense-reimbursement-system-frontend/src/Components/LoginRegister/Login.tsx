@@ -34,7 +34,7 @@ export const Login: React.FC = () => {
     try {
       const response = await axios.post("http://localhost:8080/auth/login", loginCreds, { withCredentials: true });
       store.loggedInUser = response.data;
-      // local store the loggged in User data to use when we create a new request
+      // local store the logged in User data to use when we create a new request
       localStorage.setItem("loggedInUser", JSON.stringify(response.data));
 
       alert(`${store.loggedInUser.username} has logged in! Welcome.`);
@@ -79,7 +79,18 @@ export const Login: React.FC = () => {
 
           <Row className="mt-3">
             <Col className="d-flex justify-content-center">
-              <Button variant="success" className="me-2 px-4" onClick={login}>
+              <Button
+                variant="primary"
+                className="me-2 px-4"
+                onClick={login}
+                style={{
+                  backgroundColor: "#0056b3", // Darker blue for consistency with the theme
+                  borderColor: "#0056b3",
+                  transition: "background-color 0.3s ease-in-out",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#004085")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#0056b3")}
+              >
                 <FaSignInAlt className="me-2" /> Login
               </Button>
               <Button variant="dark" onClick={() => navigate("/register")}>
