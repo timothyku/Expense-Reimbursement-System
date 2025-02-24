@@ -52,8 +52,8 @@ export const Login: React.FC = () => {
   return (
     <Container className="d-flex justify-content-center align-items-center vh-100">
       <Card className="p-4 shadow-lg w-50">
-        <h2 className="text-center mb-4">Welcome</h2>
-        <h4 className="text-center text-muted">Please Log In</h4>
+        <h2 className="text-center mb-4">Expense Reimbursement System</h2>
+        <h4 className="text-center text-muted">Welcome, please Log In</h4>
 
         <Form>
           <Form.Group controlId="username" className="mb-3">
