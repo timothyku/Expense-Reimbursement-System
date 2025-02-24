@@ -187,6 +187,7 @@ export const OthersRequestTable: React.FC = () => {
                             onClick={() =>
                               handleRequestAction(req.reimbId, "approve")
                             }
+                            style={{ marginRight: '5px' }}
                           >
                             Approve
                           </Button>{" "}
