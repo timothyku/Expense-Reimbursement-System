@@ -42,8 +42,8 @@ public class UserController {
     @PostMapping("/update-role")
     @ManagerOnly
     public ResponseEntity<String> updateUserRole(@RequestBody UserRoleUpdateDTO userRoleUpdateDTO) {
-        System.out.println("Received UseriD: " + userRoleUpdateDTO.getUserId());
-        System.out.println("Received Role: " + userRoleUpdateDTO.getNewRole());
+        //System.out.println("Received UseriD: " + userRoleUpdateDTO.getUserId());
+        //System.out.println("Received Role: " + userRoleUpdateDTO.getNewRole());
 
         userService.updateUserRole(userRoleUpdateDTO.getUserId(), userRoleUpdateDTO.getNewRole());
         return ResponseEntity.ok("User role updated successfully.");

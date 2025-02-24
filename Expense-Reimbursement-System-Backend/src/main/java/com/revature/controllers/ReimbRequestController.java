@@ -1,6 +1,8 @@
 package com.revature.controllers;
 
+import com.revature.aspects.ManagerOnly;
 import com.revature.models.DTOs.IncomingReimbRequestDTO;
+import com.revature.models.DTOs.RequestStatusUpdateDTO;
 import com.revature.models.ReimbRequest;
 import com.revature.services.ReimbRequestService;
 import jakarta.servlet.http.HttpSession;
@@ -64,6 +66,22 @@ public class ReimbRequestController {
 
         List<ReimbRequest> allRequests = reimbRequestService.getAllRequests();
         return ResponseEntity.ok(allRequests);
+    }
+
+    @PostMapping("/approve")
+    @ManagerOnly
+    public ResponseEntity<String> approveRequest(@RequestBody RequestStatusUpdateDTO requestStatusUpdateDTO) {
+
+        reimbRequestService.approveRequest(requestStatusUpdateDTO.getReimbId());
+        return ResponseEntity.ok("Expense reimbursement request has been approved.");
+    }
+
+    @PostMapping("/deny")
+    @ManagerOnly
+    public ResponseEntity<String> denyRequest(@RequestBody RequestStatusUpdateDTO requestStatusUpdateDTO) {
+
+        reimbRequestService.denyRequest(requestStatusUpdateDTO.getReimbId());
+        return ResponseEntity.ok("Expense reimbursement request has been denied.");
     }
 
 }

@@ -49,6 +49,26 @@ export const OthersRequestTable: React.FC = () => {
     setLoading(false);
   };
 
+  // Approve request
+  const approveRequest = async (request:Request) => {
+    
+    const response = await axios.post("http://localhost:8080/requests/approve",
+        {reimbId: request.reimbId }, 
+        { withCredentials: true}
+    )
+    getOthersPendingRequests();
+  };
+
+  // Deny request
+  const denyRequest = async (request:Request) => {
+    
+    const response = await axios.post("http://localhost:8080/requests/deny",
+        {reimbId: request.reimbId }, 
+        { withCredentials: true}
+    )
+    getOthersPendingRequests();
+  };
+
   // Function to format status as a badge
   const renderStatusBadge = (status: string) => {
     let variant;
@@ -96,6 +116,7 @@ export const OthersRequestTable: React.FC = () => {
               <th>Description</th>
               <th>Amount ($)</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
 
@@ -108,6 +129,10 @@ export const OthersRequestTable: React.FC = () => {
                   <td>{request.description}</td>
                   <td>{request.amount.toFixed(2)}</td>
                   <td>{renderStatusBadge(request.status)}</td>
+                  <td>
+                    <Button variant="success" onClick={() => approveRequest(request)}>Approve</Button>{' '}
+                    <Button variant="danger" onClick={() => denyRequest(request)}>Deny</Button>
+                  </td>
                 </tr>
               ))
             ) : (
