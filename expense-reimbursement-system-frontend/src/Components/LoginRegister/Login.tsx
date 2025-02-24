@@ -40,7 +40,7 @@ export const Login: React.FC = () => {
       alert(`${store.loggedInUser.username} has logged in! Welcome.`);
 
       if (store.loggedInUser.role === "manager") {
-        navigate("/users");
+        navigate("/requests/requests-for-approval");
       } else {
         navigate("/requests/my-requests");
       }

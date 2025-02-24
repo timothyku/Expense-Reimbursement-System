@@ -19,7 +19,7 @@ export const OthersRequestTable: React.FC = () => {
     setLoading(true);
     try {
       const response = await axios.get(`http://localhost:8080/requests/${endpoint}`, { withCredentials: true });
-      setRequests(response.data.sort((a, b) => a.reimbId - b.reimbId));
+      setRequests(response.data.sort((a, b) => b.reimbId - a.reimbId));
     } catch {
       alert("Something went wrong while fetching requests");
     }

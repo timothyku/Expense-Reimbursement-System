@@ -32,7 +32,7 @@ export const RequestTableManager: React.FC = () => {
         "http://localhost:8080/requests/my-requests",
         { withCredentials: true }
       );
-      setRequests(response.data);
+      setRequests(response.data.sort((a, b) => b.reimbId - a.reimbId));
     } catch {
       alert("Something went wrong while fetching requests");
     }
@@ -47,7 +47,7 @@ export const RequestTableManager: React.FC = () => {
         "http://localhost:8080/requests/my-pending-requests",
         { withCredentials: true }
       );
-      setRequests(response.data);
+      setRequests(response.data.sort((a, b) => a.reimbId - b.reimbId));
     } catch {
       alert("Something went wrong while fetching pending requests");
     }
